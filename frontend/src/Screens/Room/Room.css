@@ -1,0 +1,157 @@
+*{
+    margin: 0px;
+}
+
+.sidebar {
+    width: 200px;
+    background: #1a1c1e;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    height: 95vh;
+    position: absolute;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.sidebar-logo {
+    font-size: 24px;
+    padding-top: 10px;
+}
+
+.sidebar-logo-text {
+    padding: 10px 0;
+    font-size: 1.6rem;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.sidebar-menu li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar-menu li.active,
+.sidebar-menu li:hover {
+    background: #404246;
+}
+
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.user-avatar {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-name {
+    font-weight: bold;
+}
+
+.user-email {
+    font-size: 12px;
+    color: #bbb;
+}
+
+.main{
+    margin-left: 220px;
+    padding-top: 2rem;
+}
+
+.streams{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    gap: 7rem;
+    padding-left: 5rem;
+    padding-top:5rem ;
+}
+
+.my-stream video{
+    border-radius: 10px;
+    /* border: 2px solid white; */
+    scale: 1.2;
+    width: 30rem;
+}
+
+.remote-stream video{
+    border-radius: 10px;
+    /* border: 2px solid white; */
+    scale: 1.2;
+    width: 30rem;
+}
+
+.my-stream .username{
+    color: white;
+    background-color: #1a1c1e;
+    /* border: 2px solid white; */
+    border-radius: 10px;
+    width: fit-content;
+    padding: 1.2rem;
+    position: relative;
+    top: -4rem;
+    left: -2rem;
+}
+
+.remote-stream .username{
+    color: white;
+    background-color: #1a1c1e;
+    /* border: 2px solid white; */
+    border-radius: 10px;
+    width: fit-content;
+    padding: 1.2rem;
+    position: relative;
+    top: -4rem;
+    left: -2rem;
+}
+
+.call-nav{
+    background-color: #414144;
+    border-radius:10px;
+    width: fit-content;
+    justify-self: center;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1.3rem;
+}
+
+.call-btn{
+    position: absolute;
+    top: 40rem;
+    left: 17rem;
+    scale: 1.2;
+    margin-top: 5rem;
+}
+
+.accept-btn{
+    position: absolute;
+    top: 40rem;
+    left: 20rem;
+    scale: 1.2;
+    margin-top: 5rem;
+}
