@@ -1,123 +1,147 @@
-// the key to video on off button would be negotiation functions... change them to manuak firing using buttons... this negotiation fires everytime whenever the contract changes ie. video activation, mic activation, network change from 4G to wifi
-
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSocket } from "../../contexts/SocketContext";
-import Peer from "../../Service/Peer"
+import Peer from "peerjs"
 import Sidebar from "./Sidebar";
+import { Mic, MicOff, Camera, CameraOff, PhoneOff } from "lucide-react";
 import "./Room.css"
 
 function Room() {
     const [mystream, setMystream] = useState(null);
     const [remoteStream, setremoteStream] = useState(null);
-    const [remoteSocketId, setremoteSocketId] = useState(null);
-    const [incommingCall, setincommingCall] = useState(false);
-    const [user, setUser] = useState({});
+    const [remotePeerId, setremotePeerId] = useState(null);
+    const [remoteUser, setremoteUser] = useState(false);
+    const [micOn, setMicOn] = useState(true);
+    const [videoOn, setVideoOn] = useState(true);
+    const [user, setUser] = useState(null);
+    const [isJoined, setIsJoined] = useState(false);
+    const isCalling = useRef(false);
+
+    const peerInstance = useRef(null);
     const { socket } = useSocket();
 
-    // useEffect(()=>{
-    //     setUser(JSON.parse(localStorage.getItem("user")));
-    // },[])
+    // Loads the user data from local storage
+    useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (storedUser) setUser(storedUser);
+    }, []);
 
+    // gets the stream, sets it to mystream 
+    useEffect(() => {
+        const getStream = async () => {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                audio: true,
+                video: true
+            })
+            setMystream(stream);
 
-    const handleUserConnected = (data) => {
-        const { email, name, id } = data;
-        setremoteSocketId(id);
-        console.log(`Email: ${email}, Name: ${name} has connected`);
-    }
+            const peer = new Peer();
+            peerInstance.current = peer;
 
-    const handleCall = async () => {
-        const stream = await navigator.mediaDevices.getUserMedia({
-            audio: true,
-            video: true
-        })
-        // emiting or sending the offer to other user 
-        const offer = await Peer.getOffer();
-        socket.emit("user:call", { to: remoteSocketId, offer: offer });
-        setMystream(stream);
-    }
+            peer.on('call', (call) => {
+                console.log("Incomming Call");
 
-    const handleIncommingCall = async ({ from, offer }) => {
-        setremoteSocketId(from);
-        const stream = await navigator.mediaDevices.getUserMedia({
-            audio: true,
-            video: true
-        })
-        setMystream(stream);
+                call.answer(stream); // answering with stream
 
-        // BACKEND SE DUSRE USER KI CALL KI INFO AATI HAI LIKE HIS ID, AND OFFER CREATED BY HIM
-        console.log("Incoming Call", from, offer);
-        // the state used to create incomming call modal and assign answer button
-        setincommingCall(true);
-        // WE CREATE AN ANSWER WHICH IS TO BE SENT TO THE USER WHO CALLED
-        const ans = await Peer.getAnswer(offer);
-        socket.emit("call:accepted", { to: from, ans })
-    }
+                // Recieving the caller stream
+                call.on('stream', (userVideoStream) => {
+                    console.log("Recieving the remote stream");
+                    setremoteStream(userVideoStream);
+                })
+            })
 
-
-    const sendstreams = () => {
-        for (const track of mystream.getTracks()) {
-            Peer.peer.addTrack(track, mystream);
+            return () => {
+                peer.destroy();
+            }
         }
+        getStream();
+    }, [])
+
+
+    const toggleMic = () => {
+        const audioTrack = mystream.getAudioTracks()[0];
+        if (audioTrack) {
+            audioTrack.enabled = !audioTrack.enabled;
+            setMicOn(!micOn);
+            console.log("Mic :" + micOn);
+        }
+    };
+
+    const toggleVideo = () => {
+        const videoTrack = mystream.getVideoTracks()[0];
+        if (videoTrack) {
+            videoTrack.enabled = !videoTrack.enabled;
+            setVideoOn(!videoOn);
+            console.log("Video :" + videoOn);
+        }
+    };
+
+    const handleRoomJoin = () => {
+
+        if (!peerInstance.current) return;
+
+        const myPeerId = peerInstance.current.id
+
+        socket.emit("join-room", {
+            name: user.name,
+            email: user.email,
+            roomCode: user.roomCode,
+            peerId: myPeerId
+        });
+
     }
 
-    const handleCallAccepted = ({ from, ans }) => {
-        // WE SET THE CALL TO LOCAL DESCRIPTION
-        Peer.setLocalDescription(ans);
-        console.log("Call Accepted");
-        sendstreams()
-    }
+    useEffect(() => {
+        socket.on("join-room", (data) => {
+            const { email, roomCode } = data;
+            console.log(`Email : ${email} has joined room: ${roomCode}. No of Participants: ${data.userCount}`);
+            setIsJoined(true);
+        })
 
-    const handleNegotitaion = async () => {
-        const offer = await Peer.getOffer();
-        socket.emit("peer:nego-needed", { to: remoteSocketId, offer: offer });
-    }
+        // clean up function
+        return () => { socket.off("join-room") };
+    }, [socket])
 
-    const handleNegoIncoming = async ({ from, offer }) => {
-        const ans = await Peer.getAnswer(offer);
-        socket.emit("peer:nego-done", { to: from, ans })
-    }
-
-    const handleNegoFinal = async ({ from, ans }) => {
-        await Peer.setLocalDescription(ans);
-    }
-
-    const disconnect = (e)=>{
+    const disconnect = (e) => {
         e.preventDefault();
-        // socket.off
         window.location.href = "http://localhost:5174"
     }
 
-
     useEffect(() => {
-        Peer.peer.addEventListener("negotiationneeded", handleNegotitaion);
-        return () => {
-            Peer.peer.removeEventListener("negotiationneeded", handleNegotitaion)
+
+        const handleUserConnected = (data) => {
+            const { email, name, id } = data;
+            setremotePeerId(id);
+            console.log(`Email: ${email}, Name: ${name} has connected`);
+
+            // calls the helper function 
+            callUser(id, name);
+
         }
-    }, [handleNegotitaion])
 
-    useEffect(() => {
-        Peer.peer.addEventListener("track", async ev => {
-            const [remoteStream] = ev.streams;
-            console.log("Got Tracks!");
-            setremoteStream(remoteStream);
-        })
-    }, [])
+        const callUser = async (remoteId, remoteName) => {
 
-    useEffect(() => {
+            if (!peerInstance.current || !mystream) return;
+
+            // emiting or sending the offer to other user 
+            console.log(`Calling ${remoteId}`);
+
+            isCalling.current = true;
+            const call = peerInstance.current.call(remoteId, mystream);
+
+            call.on('stream', (remoteStream) => {
+                console.log("Caller received the remote stream");
+                setremoteUser(remoteName);
+                setremoteStream(remoteStream);
+            });
+        }
+
         socket.on("user-connected", handleUserConnected);
-        socket.on("incomming-call", handleIncommingCall);
-        socket.on("call:accepted", handleCallAccepted);
-        socket.on("peer:nego-needed", handleNegoIncoming);
-        socket.on("peer:nego-final", handleNegoFinal);
+
         return () => {
             socket.off("user-connected", handleUserConnected);
-            socket.off("incomming-call", handleIncommingCall);
-            socket.off("call:accepted", handleCallAccepted);
-            socket.off("peer:nego-needed", handleNegoIncoming);
-            socket.off("peer:nego-final", handleNegoFinal);
         };
-    }, [socket, handleUserConnected, handleIncommingCall, handleCallAccepted, handleNegoIncoming, handleNegoFinal]);
+    }, [socket, mystream]);
 
 
 
@@ -127,44 +151,46 @@ function Room() {
             <Sidebar />
             <div className="main">
                 <h1>Room</h1>
-                <h4>{remoteSocketId ? 'Connected' : 'No one in room'}</h4>
-                {remoteSocketId && !incommingCall && <button className="call-btn" onClick={handleCall}>Call</button>}
-                {mystream && incommingCall && <button onClick={sendstreams} className="accept-btn">Accept</button>}
+                <h4>{remotePeerId ? 'Connected' : 'No one in room'}</h4>
+                {mystream && !isJoined && <button onClick={handleRoomJoin} className="accept-btn"
+                    disabled={!mystream}
+                    style={{ opacity: mystream ? 1 : 0.5 }}
+                >{mystream ? "Join Meeting" : "Starting Camera..."}</button>}
                 <div className="streams">
-                {mystream && (
-                    <div className="my-stream">
-                        <video 
-                            autoPlay
-                            muted
-                            ref={(videoEl) => {
-                                if (videoEl) videoEl.srcObject = mystream;
-                            }}
-                        />
+                    {mystream && (
+                        <div className="my-stream">
+                            <video
+                                autoPlay
+                                // muted
+                                ref={(videoEl) => {
+                                    if (videoEl) videoEl.srcObject = mystream;
+                                }}
+                            />
                             <div className="username">{user.name}</div>
                         </div>
-                )}
-                {remoteStream && (
-                    <div className="remote-stream">
-                        <video 
-                            autoPlay
-                            muted
-                            ref={(videoEl) => {
-                                if (videoEl) videoEl.srcObject = remoteStream;
-                            }}
-                        />
-                            <div className="username">Username</div>
+                    )}
+                    {remoteStream && (
+                        <div className="remote-stream">
+                            <video
+                                autoPlay
+                                // muted
+                                ref={(videoEl) => {
+                                    if (videoEl) videoEl.srcObject = remoteStream;
+                                }}
+                            />
+                            <div className="username">{(remoteUser)? remoteUser : "Username"}</div>
                         </div>
-                )}
+                    )}
                 </div>
-                {remoteStream &&(
-                    <div className="call-nav">
-                    <button style={{backgroundColor:"red"}} onClick={disconnect}>Hangup</button>
-                    <button>Mic</button>
-                    <button>Video</button>
+                <div className="call-nav">
+                    {remoteStream && (<button style={{ backgroundColor: "red" }} onClick={disconnect}><PhoneOff /></button>)}
+                    <button onClick={toggleMic}>
+                        {micOn ? (<Mic />) : (<MicOff />)}
+                    </button>
+                    <button onClick={toggleVideo}>
+                        {videoOn ? (<Camera />) : (<CameraOff />)}
+                    </button>
                 </div>
-                )}
-                
-
             </div>
         </>
     )
