@@ -1,19 +1,28 @@
 @import "tailwindcss";
 
-*{
+* {
     margin: 0px;
+}
+
+.hamburger-btn {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    background-color: #141414;
+    z-index: 11;
 }
 
 .sidebar {
     width: 200px;
-    background: #1a1c1e;
+    background: #121415;
     color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 20px;
-    height: 95vh;
+    height: 100vh;
     position: absolute;
+    z-index: 10;
 }
 
 .logo {
@@ -41,7 +50,8 @@
 
 .sidebar-menu li {
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
     cursor: pointer;
 }
 
@@ -76,35 +86,37 @@
     color: #bbb;
 }
 
-.main{
-    margin-left: 220px;
+.main {
+    margin-left: 25px;
     padding-top: 2rem;
 }
 
-.streams{
+.streams {
     display: flex;
     flex-direction: row;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     gap: 7rem;
     padding-left: 5rem;
-    padding-top:5rem ;
+    padding-top: 5rem;
 }
 
-.my-stream video{
+.my-stream video {
     border-radius: 10px;
-    /* border: 2px solid white; */
+    border: 2px solid white;
     scale: 1.2;
     width: 30rem;
+    transform: scaleX(-100%);
 }
 
-.remote-stream video{
+.remote-stream video {
     border-radius: 10px;
-    /* border: 2px solid white; */
+    border: 2px solid white;
     scale: 1.2;
     width: 30rem;
+    transform: scaleX(-100%);
 }
 
-.my-stream .username{
+.my-stream .username {
     color: white;
     background-color: #1a1c1e;
     /* border: 2px solid white; */
@@ -116,7 +128,7 @@
     left: -2rem;
 }
 
-.remote-stream .username{
+.remote-stream .username {
     color: white;
     background-color: #1a1c1e;
     /* border: 2px solid white; */
@@ -128,10 +140,11 @@
     left: -2rem;
 }
 
-.call-nav{
-    background-color: #414144;
-    border-radius:10px;
+.call-nav {
+    background-color: #0a0a0a;
+    border-radius: 7px;
     width: fit-content;
+    margin-top: 4rem;
     justify-self: center;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -142,7 +155,7 @@
     gap: 1.3rem;
 }
 
-.call-btn{
+.call-btn {
     position: absolute;
     top: 40rem;
     left: 17rem;
@@ -150,10 +163,76 @@
     margin-top: 5rem;
 }
 
-.accept-btn{
+.accept-btn {
     position: absolute;
     top: 40rem;
     left: 20rem;
     scale: 1.2;
     margin-top: 5rem;
+}
+
+@media (width > 768px) {
+    .sidebar {
+        transform: translateX(0%);
+    }
+
+    .hamburger-btn {
+        display: none;
+    }
+
+    .main {
+        margin-left: 220px;
+    }
+}
+
+@media (width <= 768px){
+    
+}
+
+@media (width <=480px) {
+    .sidebar {
+        transition: all 0.3s ease-in-out;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.is-open {
+        transform: translateX(0%);
+    }
+
+    .logo {
+        transform: scale(0.8);
+        margin-top: 2.5rem;
+        padding: 0px;
+    }
+
+    .main {
+        padding-top: 70px;
+    }
+
+    .my-stream {
+        position: absolute;
+        margin-top: 22rem;
+        height: 12rem;
+        width: 12rem;
+        left: 45px;
+    }
+
+    .remote-stream {
+        position: absolute;
+        top: 13rem;
+        left: 2.3rem;
+        /* border: 2px solid #fff; */
+        /* height: 50rem; */
+        width: 21rem;
+    }
+
+    .call-nav {
+        position: absolute;
+        top: 45rem;
+    }
+
+    .accept-btn {
+        left: 9rem;
+    }
+
 }

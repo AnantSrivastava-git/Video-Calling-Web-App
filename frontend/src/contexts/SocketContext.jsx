@@ -52,7 +52,10 @@ export const useSocket = () =>{
 export const SocketProvider = ( props ) => {
 
   // useMemo makes sure baar baar connection na krna pade ek baar krke hi kaam ho jayga
-  const socket = useMemo(()=> io("localhost:8000"), [])
+  // localhost:8000
+  const socket = useMemo(()=> io("localhost:8000", {
+    transports: ["websocket"],
+  }), [])
 
   // Socket connection logic here
   return (

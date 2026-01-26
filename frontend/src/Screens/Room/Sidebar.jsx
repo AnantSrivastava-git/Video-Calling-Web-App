@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { Menu } from 'lucide-react'
+
 // set
 const Sidebar = () => {
     // const [user, setuser] = useState("NULL");
@@ -11,21 +13,27 @@ const Sidebar = () => {
     //     }
     // }, [])
 
-     const [user, setUser] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (storedUser) setUser(storedUser);
-  }, []);
+    const toggleIsOpen = () => setIsOpen(!isOpen);
+
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (storedUser) setUser(storedUser);
+    }, []);
 
 
     return (
         <>
             {/* Sidebar */}
-            <aside className="sidebar">
+            <button className='hamburger-btn' onClick={toggleIsOpen}><Menu/></button>
+
+            <aside className={`sidebar ${isOpen ? 'is-open' : ''}`}>
                 <div className="logo">
                     <div className="sidebar-logo">◎</div>
-                    <div className="sidebar-logo-text">Psycho-Lotus</div>
+                    <div className="sidebar-logo-text">Saakshat</div>
                 </div>
                 <ul className="sidebar-menu">
                     <li className="active">Dashboard</li>

@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Share+Tech&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-Sansation: "Sansation", sans-serif; 
+  --font-ShareTech: "Share Tech", sans-serif; 
+}
+
+
+body{
+    @apply bg-[#020202] font-Sansation px-0 py-0 m-0;
+}
+
+button{
+    @apply bg-[#39138d] w-fit;
+}
