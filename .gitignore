@@ -10,6 +10,7 @@ node_modules
 .env.production.local
 backend/.env
 frontend/.env
+.env.*
 
 # Build Outputs (Vite/React)
 dist
@@ -36,3 +37,6 @@ Thumbs.db
 
 # Testing coverage
 coverage
+
+# uploads folder
+uploads
