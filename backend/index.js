@@ -8,6 +8,13 @@ const http = require("http");
 const cors = require("cors")
 const app = express();
 const Groq = require("groq-sdk")
+const PORT = process.env.PORT || 8000;
+
+const uploadsDir = path.join(__dirname, "uploads");
+
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir);
+}
 
 const roomTranscripts = new Map();
 
@@ -51,7 +58,7 @@ app.set("socketio", io);
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) =>
-        cb(null, 'uploads/'),
+        cb(null, uploadsDir),
     filename: (req, file, cb) => {
         // the original name sent by the frontend
         const ext = path.extname(file.originalname);
@@ -200,7 +207,6 @@ io.on("connection", (socket) => {
 });
 
 
-const uploadsDir = path.join(__dirname, "uploads");
 setInterval(() => {
     fs.readdir(uploadsDir, (err, files) => {
         if (err) return console.error("Uploads read error:", err);
@@ -213,4 +219,4 @@ setInterval(() => {
     });
 }, 2 * 60 * 1000); // every 2 minutes
 
-server.listen(process.env.PORT, () => (console.log('Server running at port: 8000')));
+server.listen(PORT, () => (console.log(`Server running at port: ${PORT}`)));
