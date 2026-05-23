@@ -40,7 +40,7 @@ roomTranscripts.set("000",["Good morning everyone thanks for joining.",
 
 app.use(express.json());
 app.use(cors({
-    origin: "*", // In production, replace with your specific URL
+    origin: [process.env.FRONTEND_URL, "http://localhost:5173"],
     methods: ["GET", "POST"]
 }));
 
@@ -48,7 +48,7 @@ const server = http.createServer(app);
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 const io = new Server(server, {
     cors: {
-        origin: "*",
+        origin: [process.env.FRONTEND_URL, "http://localhost:5173"],
         methods: ["GET", "POST"],
         credentials: true
     }

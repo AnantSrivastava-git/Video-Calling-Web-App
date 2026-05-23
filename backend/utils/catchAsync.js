@@ -4,7 +4,7 @@ export const catchAsync = (fn) => (req, res, next) => {
 
 const service = (num1, num2) => {
     return num1 + num2
-} // classic leet code
+} 
 
 export const roomMakerController = catchAsync(async (req, res, next) => {
     const {num1, num2} = req.body;
