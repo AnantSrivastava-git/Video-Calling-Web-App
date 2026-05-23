@@ -1,5 +1,6 @@
 // Lobby is a screen where the user will enter the room code to join a call, along with their name and email.
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import react, { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -51,7 +52,7 @@ export default function Lobby() {
     try {
       console.log("Sending the req\n");
       console.log(summaryRoomCode);
-      const res = await axios.post("http://localhost:8000/api/summarize", {
+      const res = await axios.post(`${BACKEND_URL}/api/summarize`, {
         roomCode: summaryRoomCode,
       });
       if (res.status === 200) {

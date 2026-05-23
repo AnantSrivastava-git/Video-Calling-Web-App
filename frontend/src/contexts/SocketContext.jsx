@@ -41,6 +41,7 @@
 import React, { useContext } from "react";
 import { createContext, useMemo } from "react";
 import { io } from "socket.io-client"
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const SocketContext = createContext(null);
 
@@ -53,7 +54,7 @@ export const SocketProvider = ( props ) => {
 
   // useMemo makes sure baar baar connection na krna pade ek baar krke hi kaam ho jayga
   // localhost:8000
-  const socket = useMemo(()=> io("localhost:8000", {
+  const socket = useMemo(()=> io(`${BACKEND_URL}`, {
     transports: ["websocket"],
   }), [])
 

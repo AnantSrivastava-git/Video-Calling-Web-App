@@ -5,6 +5,7 @@ import Peer from "peerjs"
 import Sidebar from "./Sidebar";
 import { Mic, MicOff, Camera, CameraOff, PhoneOff, Captions, CaptionsOff } from "lucide-react";
 import "./Room.css"
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 // import useSpeechRecognition from "../../hooks/useSpeechRecognition";
 
 function Room() {
@@ -298,7 +299,7 @@ function Room() {
                     formData.append("socket_id", socket.id);
 
                     try {
-                        await fetch("http://localhost:8000/api/transcribe", {
+                        await fetch(`${BACKEND_URL}/api/transcribe`, {
                             method: "POST",
                             body: formData
                         })
