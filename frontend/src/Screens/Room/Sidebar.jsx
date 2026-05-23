@@ -37,7 +37,6 @@ const Sidebar = () => {
                 </div>
                 <ul className="sidebar-menu">
                     <li className="active">Dashboard</li>
-                    <li>AI Bot</li>
                     <li><a href="/patients/chat">Chat Room</a></li>
                 </ul>
                 <div className="sidebar-user">

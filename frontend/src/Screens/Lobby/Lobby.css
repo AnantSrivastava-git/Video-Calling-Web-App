@@ -10,7 +10,4 @@
 body{
     @apply bg-[#020202] font-Sansation px-0 py-0 m-0;
 }
-
-button{
-    @apply bg-[#39138d] w-fit;
-}
+    

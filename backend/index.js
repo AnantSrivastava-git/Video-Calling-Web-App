@@ -18,7 +18,7 @@ if (!fs.existsSync(uploadsDir)) {
 
 const roomTranscripts = new Map();
 
-roomTranscripts.set("123",["Good morning everyone thanks for joining.",
+roomTranscripts.set("000",["Good morning everyone thanks for joining.",
 "So today we are discussing the deployment of the video calling application."
 ,
 "Frontend is already deployed on vercel and backend is currently running on render."
@@ -129,9 +129,8 @@ app.post("/api/transcribe", upload.single("audio"), async (req, res) => {
 
 
 app.post("/api/summarize", async (req, res) => {
+    console.log("Request Reached")
     const { roomCode } = req.body
-    console.log(roomCode);
-
     if (!roomTranscripts.has(roomCode)) {
         console.log("Room does not exist.")
         return res.json({ Message: "Error: Entered Wrong room code." });
