@@ -20,8 +20,8 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 20px;
-    height: 100vh;
-    position: absolute;
+    height: 100%;
+    position: fixed;
     z-index: 10;
 }
 
@@ -144,7 +144,7 @@
     background-color: #0a0a0a;
     border-radius: 7px;
     width: fit-content;
-    margin-top: 4rem;
+    margin-top: 1rem;
     justify-self: center;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -210,10 +210,11 @@
 
     .my-stream {
         position: absolute;
-        margin-top: 12.5rem;
+        scale: 0.8;
+        margin-top: 12rem;
         height: 12rem;
         width: 12rem;
-        left: 45px;
+        left: 1.5rem;
     }
 
     .remote-stream {
@@ -226,9 +227,9 @@
     }
 
     .call-nav {
-        position: absolute;
+        position: static;
         scale: 0.8;
-        top: 30rem;
+        top: 5rem;
     }
 
 }
