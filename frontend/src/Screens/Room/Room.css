@@ -210,7 +210,7 @@
 
     .my-stream {
         position: absolute;
-        margin-top: 22rem;
+        margin-top: 12.5rem;
         height: 12rem;
         width: 12rem;
         left: 45px;
@@ -218,7 +218,7 @@
 
     .remote-stream {
         position: absolute;
-        top: 13rem;
+        top: 12.5rem;
         left: 2.3rem;
         /* border: 2px solid #fff; */
         /* height: 50rem; */
@@ -227,7 +227,8 @@
 
     .call-nav {
         position: absolute;
-        top: 45rem;
+        scale: 0.8;
+        top: 30rem;
     }
 
 }
