@@ -115,7 +115,7 @@ export default function Lobby() {
                 </h3>
               </div>
             </section>
-            <section className="relative top-[30rem] md:static w-full md:w-[36.5vw] h-[100vh] bg-[#0b0b0c] py-4">
+            <section className="relative top-[30rem] md:static w-full md:w-1 h-[100vh] bg-[#0b0b0c] py-4">
               <div className="text-[3rem] text-center">Lobby</div>
               <form
                 onSubmit={handleSubmit}
@@ -161,14 +161,14 @@ export default function Lobby() {
                   <button className="bg-[#39138d]" type="submit">
                     Join
                   </button>
+                  <button
+                    className="bg-neutral-700 absolute w-70 left-25 sm:bottom-75 sm:left-278 !ml-5 transition-all duration-300- hover:bg-neutral-800"
+                    onClick={() => setDialog(true)}
+                  >
+                    View last meetings' summary
+                  </button>
                 </div>
               </form>
-              <button
-                className="bg-neutral-700 absolute w-70 bottom-88 left-25 sm:bottom-75 sm:left-278 !ml-5 transition-all duration-300- hover:bg-neutral-800"
-                onClick={() => setDialog(true)}
-              >
-                View last meetings' summary
-              </button>
 
               <div className="!ml-0 !mt-10 p-10 grid grid-cols-2 grid-rows-2 gap-2">
                 <div className="col-span-1 text-[1rem] bg-zinc-900 border-gray-500 py-2 px-5 rounded-lg flex justify-between">
@@ -229,18 +229,23 @@ export default function Lobby() {
           <div className="flex row justify-between !mb-2">
             <h2 className="!pt-2.5">Summary</h2>
             <div className="flex flex-row gap-3">
-            <button
-              onClick={() => navigator.clipboard.writeText(summary.replace(/\*\*(.*?)\*\*/g, '$1'))}
-              className="rounded-2xl !px-0"
-            >
-              <Copy className="!p-0" />
-            </button>
-            <button
-              onClick={() => setSummaryDialog(false)}
-              className="rounded-2xl !px-0"
-            >
-              <X className="!p-0" />
-            </button></div>
+              <button
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    summary.replace(/\*\*(.*?)\*\*/g, "$1"),
+                  )
+                }
+                className="rounded-2xl !px-0"
+              >
+                <Copy className="!p-0" />
+              </button>
+              <button
+                onClick={() => setSummaryDialog(false)}
+                className="rounded-2xl !px-0"
+              >
+                <X className="!p-0" />
+              </button>
+            </div>
           </div>
 
           <ReactMarkdown>{summary}</ReactMarkdown>
