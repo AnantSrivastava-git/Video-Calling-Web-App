@@ -115,7 +115,7 @@ export default function Lobby() {
                 </h3>
               </div>
             </section>
-            <section className="relative top-[30rem] md:static w-full md:w-1 h-[100vh] bg-[#0b0b0c] py-4">
+            <section className="relative top-[30rem] md:static w-full md:w-1/2 h-[100vh] bg-[#0b0b0c] py-4">
               <div className="text-[3rem] text-center">Lobby</div>
               <form
                 onSubmit={handleSubmit}
@@ -157,12 +157,12 @@ export default function Lobby() {
                     onChange={(e) => setRoomCode(e.target.value)}
                   />
                 </div>
-                <div className="flex flex-row gap-3 mt-5">
-                  <button className="bg-[#39138d]" type="submit">
+                <div className="flex flex-row gap-1 mt-5">
+                  <button className="bg-[#39138d] border border-neutral-500" type="submit">
                     Join
                   </button>
                   <button
-                    className="bg-neutral-700 absolute w-70 left-25 sm:bottom-75 sm:left-278 !ml-5 transition-all duration-300- hover:bg-neutral-800"
+                    className="bg-neutral-700 w-70 left-25 sm:bottom-75 sm:left-278 !ml-5 transition-all duration-300- hover:bg-neutral-800"
                     onClick={() => setDialog(true)}
                   >
                     View last meetings' summary

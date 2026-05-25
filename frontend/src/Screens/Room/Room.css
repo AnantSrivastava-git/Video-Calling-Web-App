@@ -164,11 +164,10 @@
 }
 
 .accept-btn {
-    position: absolute;
-    top: 40rem;
-    left: 20rem;
-    scale: 1.2;
-    margin-top: 5rem;
+    /* position: absolute;
+    top: 30rem;
+    left: 20rem; */
+    border: 2px solid #fff;
 }
 
 @media (width > 768px) {
@@ -229,10 +228,6 @@
     .call-nav {
         position: absolute;
         top: 45rem;
-    }
-
-    .accept-btn {
-        left: 9rem;
     }
 
 }
