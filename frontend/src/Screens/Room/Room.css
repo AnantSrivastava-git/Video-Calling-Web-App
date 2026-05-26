@@ -1,235 +1,253 @@
 @import "tailwindcss";
 
 * {
-    margin: 0px;
+  margin: 0px;
 }
 
 .hamburger-btn {
-    position: absolute;
-    top: 15px;
-    left: 10px;
-    background-color: #141414;
-    z-index: 11;
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  background-color: #141414;
+  z-index: 11;
 }
 
 .sidebar {
-    width: 200px;
-    background: #121415;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
-    height: 100%;
-    position: fixed;
-    z-index: 10;
+  width: 200px;
+  background: #121415;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  height: 100%;
+  position: fixed;
+  z-index: 10;
 }
 
 .logo {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .sidebar-logo {
-    font-size: 24px;
-    padding-top: 10px;
+  font-size: 24px;
+  padding-top: 10px;
 }
 
 .sidebar-logo-text {
-    padding: 10px 0;
-    font-size: 1.6rem;
-    color: #ffffff;
-    font-weight: bold;
+  padding: 10px 0;
+  font-size: 1.6rem;
+  color: #ffffff;
+  font-weight: bold;
 }
 
 .sidebar-menu {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .sidebar-menu li {
-    padding: 12px;
-    border-radius: 5px;
-    margin-bottom: 0.5rem;
-    cursor: pointer;
+  padding: 12px;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 
 .sidebar-menu li a {
-    color: #fff;
-    text-decoration: none;
-    display: block;
+  color: #fff;
+  text-decoration: none;
+  display: block;
 }
 
 .sidebar-menu li.active,
 .sidebar-menu li:hover {
-    background: #404246;
+  background: #404246;
 }
 
 .sidebar-user {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .user-avatar {
-    border-radius: 50%;
-    margin-right: 10px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .user-name {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .user-email {
-    font-size: 12px;
-    color: #bbb;
+  font-size: 12px;
+  color: #bbb;
 }
 
 .main {
-    margin-left: 25px;
-    padding-top: 2rem;
+  margin-left: 25px;
+  padding-top: 2rem;
 }
 
 .streams {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 7rem;
-    padding-left: 5rem;
-    padding-top: 5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 7rem;
+  padding-left: 5rem;
+  padding-top: 5rem;
+}
+
+.remote-stream {
+  border: 2px solid #fff;
+  background-color: #fff;
+  object-fit: cover;
+  overflow: contain;
+  max-width: fit-content;
+  max-height: 15rem;
 }
 
 .my-stream video {
-    border-radius: 10px;
-    border: 2px solid white;
-    scale: 1.2;
-    width: 30rem;
-    transform: scaleX(-100%);
+  border-radius: 10px;
+  border: 2px solid white;
+  scale: 1.2;
+  width: 30rem;
+  transform: scaleX(-100%);
 }
 
 .remote-stream video {
-    border-radius: 10px;
-    border: 2px solid white;
-    scale: 1.2;
-    width: 30rem;
-    transform: scaleX(-100%);
+  border-radius: 10px;
+  border: 2px solid white;
+  scale: 1.2;
+  width: 30rem;
+  object-fit: contain;
+  transform: scaleX(-100%);
 }
 
 .my-stream .username {
-    color: white;
-    background-color: #1a1c1e;
-    /* border: 2px solid white; */
-    border-radius: 10px;
-    width: fit-content;
-    padding: 1.2rem;
-    position: relative;
-    top: -4rem;
-    left: -2rem;
+  color: white;
+  background-color: #1a1c1e;
+  /* border: 2px solid white; */
+  border-radius: 10px;
+  width: fit-content;
+  padding: 1.2rem;
+  position: relative;
+  top: -4rem;
+  left: 70%;
 }
 
 .remote-stream .username {
-    color: white;
-    background-color: #1a1c1e;
-    /* border: 2px solid white; */
-    border-radius: 10px;
-    width: fit-content;
-    padding: 1.2rem;
-    position: relative;
-    top: -4rem;
-    left: -2rem;
+  color: white;
+  background-color: #1a1c1e;
+  /* border: 2px solid white; */
+  border-radius: 10px;
+  width: fit-content;
+  padding: 1.2rem;
+  position: relative;
+  top: -4rem;
+  left: 70%;
 }
 
 .call-nav {
-    background-color: #0a0a0a;
-    border-radius: 7px;
-    width: fit-content;
-    margin-top: 1rem;
-    justify-self: center;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    display: flex;
-    flex-direction: row;
-    gap: 1.3rem;
+  background-color: #0a0a0a;
+  border-radius: 7px;
+  width: fit-content;
+  margin-top: 1rem;
+  justify-self: center;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1.3rem;
 }
 
 .call-btn {
-    position: absolute;
-    top: 40rem;
-    left: 17rem;
-    scale: 1.2;
-    margin-top: 5rem;
+  position: absolute;
+  top: 40rem;
+  left: 17rem;
+  scale: 1.2;
+  margin-top: 5rem;
 }
 
 .accept-btn {
-    /* position: absolute;
+  /* position: absolute;
     top: 30rem;
     left: 20rem; */
-    border: 2px solid #fff;
+  border: 2px solid #fff;
 }
 
 @media (width > 768px) {
-    .sidebar {
-        transform: translateX(0%);
-    }
+  .sidebar {
+    transform: translateX(0%);
+  }
 
-    .hamburger-btn {
-        display: none;
-    }
+  .hamburger-btn {
+    display: none;
+  }
 
-    .main {
-        margin-left: 220px;
-    }
+  .main {
+    margin-left: 220px;
+  }
+
+  .remote-stream video {
+    height: 22.5rem;
+  }
 }
 
-@media (width <= 768px){
-    
+@media (width <= 768px) {
 }
 
 @media (width <=480px) {
-    .sidebar {
-        transition: all 0.3s ease-in-out;
-        transform: translateX(-100%);
-    }
+  .sidebar {
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-100%);
+  }
 
-    .sidebar.is-open {
-        transform: translateX(0%);
-    }
+  .sidebar.is-open {
+    transform: translateX(0%);
+  }
 
-    .logo {
-        transform: scale(0.8);
-        margin-top: 2.5rem;
-        padding: 0px;
-    }
+  .logo {
+    transform: scale(0.8);
+    margin-top: 2.5rem;
+    padding: 0px;
+  }
 
-    .main {
-        padding-top: 70px;
-    }
+  .main {
+    padding-top: 70px;
+  }
 
-    .my-stream {
-        position: absolute;
-        scale: 0.8;
-        margin-top: 12rem;
-        height: 12rem;
-        width: 12rem;
-        left: 1.5rem;
-    }
+  .my-stream {
+    position: absolute;
+    scale: 0.7;
+    margin-top: 13rem;
+    height: 12rem;
+    width: 12rem;
+    left: 1rem;
+    z-index: 10;
+  }
 
-    .remote-stream {
-        position: absolute;
-        top: 11rem;
-        left: 2.3rem;
-        /* border: 2px solid #fff; */
-        /* height: 50rem; */
-        width: 21rem;
-    }
+  .remote-stream {
+    position: absolute;
+    top: 8.5rem;
+    left: 2.3rem;
+    /* border: 2px solid #fff; */
+    /* height: 50rem; */
+    width: 21rem;
+    object-fit: cover;
+  }
 
-    .call-nav {
-        position: static;
-        scale: 0.8;
-        top: 5rem;
-    }
+  .remote-stream video {
+    scale: 1.1;
+  }
 
+  .call-nav {
+    position: static;
+    scale: 0.8;
+    top: 5rem;
+  }
 }
