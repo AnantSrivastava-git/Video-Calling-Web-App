@@ -162,6 +162,7 @@ export default function Lobby() {
                     Join
                   </button>
                   <button
+                  type="button"
                     className="bg-neutral-700 w-70 left-25 sm:bottom-75 sm:left-278 !ml-5 transition-all duration-300- hover:bg-neutral-800"
                     onClick={() => setDialog(true)}
                   >

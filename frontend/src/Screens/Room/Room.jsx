@@ -397,13 +397,13 @@ function Room() {
         </div>
 
         {captions && remoteTranscription ? (
-          <div className="!mt-130 !ml-10 h-12 w-[20rem] overflow-hidden md:!mt-0 !ml-100 w-[30rem]">
+          <div className="!mt-120 !ml-3 h-12 w-[20rem] overflow-hidden md:!mt-0 md:!ml-100 md:w-[30rem]">
             {remoteTranscription}
           </div>
         ) : (
           <div className="!mt-110 md:!mt-0"></div>
         )}
-        {<div className="!mt-120 !ml-3 h-12 w-[20rem] overflow-hidden md:!mt-0 md:!ml-100 md:w-[30rem]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil consequatur harum culpa quia exercitationem sapiente accusantium facere obcaecati deleniti? Quae, delectus ad eius obcaecati velit dolorum suscipit! Sed, impedit ullam.</div>}
+        {/* {<div className="!mt-120 !ml-3 h-12 w-[20rem] overflow-hidden md:!mt-0 md:!ml-100 md:w-[30rem]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil consequatur harum culpa quia exercitationem sapiente accusantium facere obcaecati deleniti? Quae, delectus ad eius obcaecati velit dolorum suscipit! Sed, impedit ullam.</div>} */}
 
         <div className="call-nav">
           {remoteStream && (

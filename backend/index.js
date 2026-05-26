@@ -48,7 +48,7 @@ const server = http.createServer(app);
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 const io = new Server(server, {
     cors: {
-        origin: [process.env.FRONTEND_URL, "http://localhost:5173"],
+        origin: [process.env.FRONTEND_URL, "http://localhost:5174/"],
         methods: ["GET", "POST"],
         credentials: true
     }
