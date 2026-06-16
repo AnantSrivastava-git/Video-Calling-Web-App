@@ -111,7 +111,7 @@
 
 .my-stream video {
   border-radius: 10px;
-  border: 2px solid white;
+  /* border: 2px solid white; */
   scale: 1.2;
   width: 30rem;
   transform: scaleX(-100%);
@@ -119,7 +119,7 @@
 
 .remote-stream video {
   border-radius: 10px;
-  border: 2px solid white;
+  /* border: 2px solid white; */
   scale: 1.2;
   width: 30rem;
   object-fit: contain;
